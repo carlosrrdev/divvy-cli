@@ -1,4 +1,4 @@
-from divvy import Divvy
+from .divvy import Divvy
 
 
 class DivvySplit(Divvy):
