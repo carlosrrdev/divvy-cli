@@ -1,24 +1,19 @@
-import os
-import platform
-from divvy import DivvySplit
+from divvy import DivvySplit, clear_console
+from rich.console import Console
 
 __title__ = "Divvy-CLI"
 __version__ = "0.1.0"
 __author__ = "Carlos Rodriguez"
 
+console = Console()
 
-def clear_console():
-    if platform.system() == "Windows":
-        os.system("cls")
-    else:
-        os.system("clear")
 
 def display_menu():
-    print(f"{__title__} - v{__version__}\nby {__author__}\n")
-    print("Welcome to Divvy, an expense splitting tool.\nWhat would you like to do?\n")
-    print("1. Split expenses evenly among members.")
-    print("2. Divvy up expenses based on individual contributions.")
-    print("3. Exit.\n")
+    console.print(f"[bold cyan]{__title__}[/bold cyan]\nby {__author__}\n")
+    console.rule("[bold cyan] What would you like to do? [/bold cyan]", align="left", style="bold cyan")
+    console.print("1.[yellow]Split expenses evenly among members.[/yellow]")
+    console.print("2.[yellow]Divvy up expenses based on individual contributions. [/yellow]")
+    console.print("3.[yellow]Exit. [/yellow]\n")
     is_valid_choice = False
     while not is_valid_choice:
         choice = input("Enter your choice: ")
@@ -31,15 +26,12 @@ def display_menu():
             elif choice == "3":
                 exit_program()
         else:
-            print("Invalid choice. Please enter a valid choice.\n")
+            console.print("[bright_red]Invalid choice. Please enter a valid choice.[/bright_red]\n")
 
 def create_divvy_split():
     clear_console()
     new_divvy = DivvySplit()
-    print("Creating a new Divvy Split\n")
-    new_divvy.initial_steps()
-    print(new_divvy.get_members())
-    print(new_divvy.get_expenses())
+    new_divvy.initialize()
 
 
 def create_divvy_up():

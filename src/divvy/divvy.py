@@ -1,4 +1,5 @@
 from uuid import uuid4, UUID
+from rich.console import Console
 
 
 class Divvy:
@@ -11,6 +12,7 @@ class Divvy:
         expenses = []
         self.members = members
         self.expenses = expenses
+        self.console = Console()
 
     def add_member(self, member_name: str) -> UUID:
         """
@@ -85,28 +87,3 @@ class Divvy:
         """
         total = sum(expense["amount"] for expense in self.expenses)
         return total
-
-    def initial_steps(self):
-        print("Step 1. Add participants.")
-        continue_adding_members = True
-        while continue_adding_members:
-            member_name = input("\nEnter the name of a new member: ")
-            if member_name:
-                self.add_member(member_name)
-            cnt = input("Add more members? (y/n):")
-            if cnt == "y":
-                continue
-            else:
-                continue_adding_members = False
-        print("\nStep 2. Add expenses.")
-        continue_adding_expenses = True
-        while continue_adding_expenses:
-            expense_name = input("\nEnter the name of the new expense: ")
-            if expense_name:
-                expense_amount = float(input(f"Enter the expense amount for {expense_name}: $"))
-                self.add_expense(expense_name, expense_amount)
-            cnt = input("Add more expenses? (y/n):")
-            if cnt == "y":
-                continue
-            else:
-                continue_adding_expenses = False
