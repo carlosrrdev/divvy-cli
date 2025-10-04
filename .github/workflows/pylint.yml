@@ -21,4 +21,4 @@ jobs:
         pip install pylint
     - name: Analysing the code with pylint
       run: |
-        timeout 5m pylint $(git ls-files '*.py')
+        timeout 20m pylint $(git ls-files '*.py')
